@@ -1,0 +1,20 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+div {
+	background-color: rgba(255, 0, 0, 0.425);
+	height: 200px;
+	width: 200px;
+	margin: 1rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.album_container {
+	display: grid;
+	grid-template-columns: repeat(2, auto);
+	column-gap: 2rem;
+	justify-items: center;
+}
