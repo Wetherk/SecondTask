@@ -9,10 +9,10 @@ let pageNumber = 1;
 
 // functions
 
-function createSingleBlock(albumName) {
+function createSingleBlock(albumName, albumId) {
 	const icon = document.createElement("img");
 	icon.setAttribute("src", "/images/albumIcon.png");
-	icon.classList.add("album_img");
+	icon.classList.add("album_icon");
 
 	const text = document.createTextNode(albumName);
 
@@ -22,8 +22,16 @@ function createSingleBlock(albumName) {
 
 	const block = document.createElement("div");
 	block.classList.add("album_preview");
+	block.setAttribute("id", albumId);
 	block.appendChild(paragraph);
 	block.appendChild(icon);
+
+	const returnId = function () {
+		console.log(this.id);
+		localStorage.setItem("clickedId", this.id);
+		location.href = "album.html";
+	};
+	block.onclick = returnId;
 
 	albumContainer.appendChild(block);
 }
@@ -41,8 +49,26 @@ function renderPageNumber() {
 }
 
 function renderAlbums() {
-	for (let i = pageNumber * 8; i > pageNumber * 8 - 8; i--) {
-		createSingleBlock(dataArr[i].title);
+	if (pageNumber == Math.ceil(dataArr.length / 8)) {
+		for (
+			let i = pageNumber * 8 - 8;
+			i < pageNumber * 8 - (dataArr.length % 8);
+			i++
+		) {
+			createSingleBlock(dataArr[i].title, dataArr[i].id);
+		}
+		nextBtn.classList.add("hide");
+	} else {
+		for (let i = pageNumber * 8 - 8; i < pageNumber * 8; i++) {
+			createSingleBlock(dataArr[i].title, dataArr[i].id);
+		}
+		nextBtn.classList.remove("hide");
+	}
+
+	if (pageNumber == 1) {
+		prevBtn.classList.add("hide");
+	} else {
+		prevBtn.classList.remove("hide");
 	}
 	renderPageNumber();
 }
