@@ -32,7 +32,7 @@
 	opacity: 0.8;
 }
 
-.album_preview,
+.album_preview:hover,
 .img_style:hover {
 	transition: all 0.5s;
 	box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
