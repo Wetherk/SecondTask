@@ -121,4 +121,5 @@ a:hover {
 .photo_container {
 	display: flex;
 	flex-wrap: wrap;
+	justify-content: center;
 }
